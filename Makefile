@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=docker
-PKG_VERSION:=28.5.2
+PKG_VERSION:=29.8.0
 PKG_RELEASE:=1
 PKG_LICENSE:=Apache-2.0
 PKG_LICENSE_FILES:=LICENSE
@@ -10,8 +10,8 @@ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_GIT_URL:=github.com/docker/cli
 PKG_GIT_REF:=v$(PKG_VERSION)
 PKG_SOURCE_URL:=https://codeload.$(PKG_GIT_URL)/tar.gz/$(PKG_GIT_REF)?
-PKG_HASH:=5864ccdfceef3a9e8ddb29b4a555d5b82a551b5258067aac164b6156c6cfdc08
-PKG_GIT_SHORT_COMMIT:=ecc6942 # SHA1 used within the docker executables
+PKG_HASH:=c5fadbc00c02dbecb1b7c9936e188baf9c80421a9107e7e9ad36a0923a0fc764
+PKG_GIT_SHORT_COMMIT:=88096ef # SHA1 used within the docker executables
 
 PKG_MAINTAINER:=Gerard Ryan <G.M0N3Y.2503@gmail.com>
 
@@ -38,8 +38,9 @@ endef
 
 GO_PKG_INSTALL_EXTRA:=\
 	cli/compose/schema/data \
+	vendor/github.com/santhosh-tekuri/jsonschema/v6/metaschemas \
 	vendor/google.golang.org/protobuf/internal/editiondefaults/editions_defaults.binpb
-
+    
 TAR_OPTIONS:=--strip-components 1 $(TAR_OPTIONS)
 TAR_CMD=$(HOST_TAR) -C $(1) $(TAR_OPTIONS)
 TARGET_LDFLAGS += $(if $(CONFIG_USE_GLIBC),-lc -lgcc_eh)
